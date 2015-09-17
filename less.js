@@ -49,3 +49,13 @@
     word-wrap: break-word;
     word-break: break-all;
 }
+//css3动画  css属性 持续时间 速度曲线 延迟时间
+.transition(@css:all,@time:1s,@fun:ease,@start:0s){
+    transition: @css @time @fun @start;
+    -moz-transition: @css @time @fun @start;
+    /* Firefox 4 */
+    -webkit-transition: @css @time @fun @start;
+    /* Safari 和 Chrome */
+    -o-transition: @css @time @fun @start;
+    /* Opera */
+}
