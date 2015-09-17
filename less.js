@@ -34,10 +34,10 @@
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
 }
-//透明
-.opacity(@x:0.5){
+//透明  滤镜以100为基础
+.opacity(@x:0.5,@y:50){
     opacity: @x;
-    filter:Alpha(opacity=@x);
+    filter:Alpha(opacity=@y);
 }
 //字体
 .font_family(@font:Arial){
