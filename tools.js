@@ -27,17 +27,43 @@ var tools = {
     },
     /**
      *
-     * @param id
-     * @param eve
-     * @param fun
+     * @param ele
+     * @param event
+     * @param callback
      * @param cap
      */
-    addEvent:function(ele,eve,fun,cap){
-        var cap = cap||false;
-        if(window.attachEvent)
-            ele[fun] = ele.attachEvent(eve,fun);
-        else
-            ele.addEventListener(eve,fun,cap);
+    //简单事件绑定兼容
+    on:function(ele,event,callback,cap){
+        cap = cap||false;
+        if(ele.addEventListener){
+            ele.addEventListener(event,callback,cap);
+        }
+        else if(ele.attachEvent){
+            ele.attachEvent('on'+event,callback);
+        }
+        else{
+            ele['on'+event] = callback;
+        }
+    },
+    /**
+     *
+     * @param ele
+     * @param event
+     * @param callback
+     * @param cap
+     */
+    //简单事件解绑兼容
+    remove:function(ele,event,callback,cap){
+        cap = cap||false;
+        if(ele.removeEventListener){
+            ele.removeEventListener(event,callback,cap);
+        }
+        else if(ele.detachEvent){
+            ele.detachEvent('on'+event,callback);
+        }
+        else{
+            ele['on'+event] = null;
+        }
     },
     /**
      *
@@ -60,6 +86,13 @@ var tools = {
         }
         return obj;
     },
+    /**
+     *
+     * @param ele
+     * @param data_name
+     * @param data
+     * @returns {*} 属性值
+     */
     //dataset兼容
     dataSet:function(ele,data_name,data){
         function name(str){
