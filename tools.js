@@ -120,7 +120,17 @@ var tools = {
             }
             return ele.getAttribute(dataName);
         }
-    }
+    },
+    //代理
+        proxy:function(context,cb){
+            if(typeof cb !== 'function'){
+                throw('cb should be a function');
+            }
+            return function(){
+                var arg = Array.prototype.slice.call(arguments);
+                return cb.apply(context,arg);
+            }
+        }
 };
 
 
